@@ -1,125 +1,172 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Penyemangat untuk Tuita</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #ffd5e5;
-            overflow: hidden;
+        .title {
+            text-align: center;
+            margin: 20px 0;
+            font-family: Arial, sans-serif;
+            color: #2196F3;
         }
         .container {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
+            justify-content: space-around;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .switch-card {
+            width: 180px;
+            margin: 10px;
             text-align: center;
         }
-        .heart {
-            font-size: 100px;
-            animation: pulse 1.5s infinite;
+
+        .image-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 10px;
+            border-radius: 10px;
+            overflow: hidden;
         }
-        .message {
-            font-size: 24px;
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.5;
+            transition: .4s;
+        }
+
+        .image-container.active img {
+            opacity: 1;
+        }
+
+        .form-check-input {
+            height: 25px !important;
+            width: 45px !important;
+        }
+
+        .switch-label {
+            margin-top: 10px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        .form-switch {
+            padding-left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-switch .form-check-input {
+            margin-left: 0;
+        }
+
+        /* Status display untuk debugging */
+        .status-display {
             margin-top: 20px;
-            opacity: 0;
-            transition: opacity 1s;
-            max-width: 80%;
-            line-height: 1.4;
-        }
-        .click-me {
-            margin-top: 30px;
-            padding: 10px 20px;
-            font-size: 18px;
-            background-color: #ff69b4;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .click-me:hover {
-            transform: scale(1.1);
-        }
-        .firework {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            animation: firework 1s ease-out;
-            opacity: 0;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-        @keyframes firework {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(-100px); opacity: 0; }
+            text-align: center;
+            font-family: monospace;
         }
     </style>
 </head>
 <body>
+    <h1 class="title">Ketika AKAD mau ngumpul</h1>
     <div class="container">
-        <div class="heart">❤️</div>
-        <div class="message" id="message"></div>
-        <button class="click-me" id="clickMe">Klik Aku, Tuita!</button>
+        <div class="switch-card">
+            <div class="image-container" id="image0">
+                <img src="dode.jpg" alt="Image A">
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="switch0" onchange="handleSwitch(0)">
+            </div>
+            <div class="switch-label">Dode</div>
+        </div>
+        <div class="switch-card">
+            <div class="image-container" id="image1">
+                <img src="ardha.jpg" alt="Image B">
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="switch1" onchange="handleSwitch(1)">
+            </div>
+            <div class="switch-label">Ardha</div>
+        </div>
+        <div class="switch-card">
+            <div class="image-container" id="image2">
+                <img src="alfian.jpg" alt="Image C">
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="switch2" onchange="handleSwitch(2)">
+            </div>
+            <div class="switch-label">Alfian</div>
+        </div>
+        <div class="switch-card">
+            <div class="image-container" id="image3">
+                <img src="komang.jpg" alt="Image D">
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="switch3" onchange="handleSwitch(3)">
+            </div>
+            <div class="switch-label">Komang</div>
+        </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <!-- Status display untuk melihat status switch -->
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script>
-        const messages = [
-            "Hai Tuita! Senyummu itu loh, bisa bikin hari jadi cerah!",
-            "Tuita, kamu tuh kuat banget. Mood jelek? Pasti bisa kamu lewati!",
-            "Tuita, ingat gak? Kamu itu punya banyak hal keren yang bisa dibanggain!",
-            "Ayo Tuita! Jangan biarkan hari ini mengalahkanmu. Kamu pasti bisa!",
-            "Tuita, kamu tuh spesial banget. Jangan lupa mencintai dirimu ya!",
-            "Hei Tuita! Bad mood itu cuma sementara, tapi kamu awesome selamanya!",
-            "Tuita, coba deh cermin. Lihat deh betapa kerennya dirimu!",
-            "Tuita, kamu punya kekuatan untuk ubah hari ini jadi menyenangkan!",
-            "Semangat, Tuita! Hari esok pasti lebih cerah untukmu!",
-            "Tuita, ingat ya: kamu itu berharga dan dicintai banyak orang!"
-        ];
+        const switches = document.querySelectorAll('.form-check-input');
+        const imageContainers = document.querySelectorAll('.image-container');
+        let activeSwitches = [false, false, false, false];
+        let activeOrder = []; // Menyimpan urutan switch yang aktif
 
-        const sound = new Howl({
-            src: ['https://assets.mixkit.co/active_storage/sfx/1115/1115-preview.mp3']
-        });
-
-        let currentMessage = 0;
-
-        function showMessage() {
-            const messageElement = document.getElementById('message');
-            messageElement.textContent = messages[currentMessage];
-            messageElement.style.opacity = 1;
-            currentMessage = (currentMessage + 1) % messages.length;
+        function updateStatusDisplay() {
+            document.getElementById('activeStatus').textContent = 
+                `Active switches: ${activeOrder.join(', ')}`;
+            document.getElementById('switchStatus').textContent = 
+                `Switch status: ${activeSwitches.map((s, i) => `${i}:${s}`).join(' ')}`;
         }
 
-        function createFirework() {
-            const firework = document.createElement('div');
-            firework.className = 'firework';
-            firework.style.left = Math.random() * window.innerWidth + 'px';
-            firework.style.top = window.innerHeight + 'px';
-            firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-            document.body.appendChild(firework);
-
-            setTimeout(() => {
-                document.body.removeChild(firework);
-            }, 1000);
-        }
-
-        document.getElementById('clickMe').addEventListener('click', () => {
-            showMessage();
-            sound.play();
-            for (let i = 0; i < 20; i++) {
-                setTimeout(createFirework, Math.random() * 500);
+        function handleSwitch(index) {
+            const isChecked = switches[index].checked;
+            
+            if (isChecked) {
+                // Jika switch dinyalakan
+                if (activeOrder.length >= 3) {
+                    // Jika sudah ada 3 switch aktif, matikan yang paling lama aktif
+                    const oldestActiveIndex = activeOrder[0];
+                    switches[oldestActiveIndex].checked = false;
+                    imageContainers[oldestActiveIndex].classList.remove('active');
+                    activeSwitches[oldestActiveIndex] = false;
+                    activeOrder.shift(); // Hapus switch terlama
+                }
+                
+                // Aktifkan switch baru
+                activeSwitches[index] = true;
+                imageContainers[index].classList.add('active');
+                activeOrder.push(index); // Tambahkan ke urutan aktif
+            } else {
+                // Jika switch dimatikan
+                activeSwitches[index] = false;
+                imageContainers[index].classList.remove('active');
+                // Hapus dari urutan aktif
+                const orderIndex = activeOrder.indexOf(index);
+                if (orderIndex > -1) {
+                    activeOrder.splice(orderIndex, 1);
+                }
             }
-        });
+
+            updateStatusDisplay(); // Update display status
+        }
+
+        // Initialize status display
+        updateStatusDisplay();
     </script>
 </body>
 </html>
