@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .title {
@@ -8,26 +9,33 @@
             margin: 20px 0;
             font-family: Arial, sans-serif;
             color: #2196F3;
+            font-size: 1.5rem;
+            padding: 0 15px;
         }
+        
         .container {
-            display: flex;
-            justify-content: space-around;
-            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            padding: 15px;
             max-width: 800px;
             margin: 0 auto;
-            flex-wrap: wrap;
         }
 
         .switch-card {
-            width: 180px;
-            margin: 10px;
+            width: 100%;
+            margin: 0 auto;
             text-align: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .image-container {
             position: relative;
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             margin: 0 auto 10px;
             border-radius: 10px;
             overflow: hidden;
@@ -48,12 +56,14 @@
         .form-check-input {
             height: 25px !important;
             width: 45px !important;
+            cursor: pointer;
         }
 
         .switch-label {
             margin-top: 10px;
             font-family: Arial, sans-serif;
             font-weight: bold;
+            font-size: 0.9rem;
         }
 
         .form-switch {
@@ -67,11 +77,26 @@
             margin-left: 0;
         }
 
-        /* Status display untuk debugging */
-        .status-display {
-            margin-top: 20px;
-            text-align: center;
-            font-family: monospace;
+        @media (max-width: 576px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                padding: 10px;
+            }
+
+            .switch-card {
+                padding: 8px;
+            }
+
+            .image-container {
+                width: 100px;
+                height: 100px;
+            }
+
+            .title {
+                font-size: 1.2rem;
+                margin: 15px 0;
+            }
         }
     </style>
 </head>
@@ -80,7 +105,7 @@
     <div class="container">
         <div class="switch-card">
             <div class="image-container" id="image0">
-                <img src="dode.jpg" alt="Image A">
+                <img src="dode.jpg" alt="Dode">
             </div>
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" role="switch" id="switch0" onchange="handleSwitch(0)">
@@ -89,7 +114,7 @@
         </div>
         <div class="switch-card">
             <div class="image-container" id="image1">
-                <img src="ardha.jpg" alt="Image B">
+                <img src="ardha.jpg" alt="Ardha">
             </div>
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" role="switch" id="switch1" onchange="handleSwitch(1)">
@@ -98,7 +123,7 @@
         </div>
         <div class="switch-card">
             <div class="image-container" id="image2">
-                <img src="alfian.jpg" alt="Image C">
+                <img src="alfian.jpg" alt="Alfian">
             </div>
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" role="switch" id="switch2" onchange="handleSwitch(2)">
@@ -107,7 +132,7 @@
         </div>
         <div class="switch-card">
             <div class="image-container" id="image3">
-                <img src="komang.jpg" alt="Image D">
+                <img src="komang.jpg" alt="Komang">
             </div>
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" role="switch" id="switch3" onchange="handleSwitch(3)">
@@ -116,57 +141,37 @@
         </div>
     </div>
 
-    <!-- Status display untuk melihat status switch -->
-    
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script>
         const switches = document.querySelectorAll('.form-check-input');
         const imageContainers = document.querySelectorAll('.image-container');
         let activeSwitches = [false, false, false, false];
-        let activeOrder = []; // Menyimpan urutan switch yang aktif
-
-        function updateStatusDisplay() {
-            document.getElementById('activeStatus').textContent = 
-                `Active switches: ${activeOrder.join(', ')}`;
-            document.getElementById('switchStatus').textContent = 
-                `Switch status: ${activeSwitches.map((s, i) => `${i}:${s}`).join(' ')}`;
-        }
+        let activeOrder = [];
 
         function handleSwitch(index) {
             const isChecked = switches[index].checked;
             
             if (isChecked) {
-                // Jika switch dinyalakan
                 if (activeOrder.length >= 3) {
-                    // Jika sudah ada 3 switch aktif, matikan yang paling lama aktif
                     const oldestActiveIndex = activeOrder[0];
                     switches[oldestActiveIndex].checked = false;
                     imageContainers[oldestActiveIndex].classList.remove('active');
                     activeSwitches[oldestActiveIndex] = false;
-                    activeOrder.shift(); // Hapus switch terlama
+                    activeOrder.shift();
                 }
                 
-                // Aktifkan switch baru
                 activeSwitches[index] = true;
                 imageContainers[index].classList.add('active');
-                activeOrder.push(index); // Tambahkan ke urutan aktif
+                activeOrder.push(index);
             } else {
-                // Jika switch dimatikan
                 activeSwitches[index] = false;
                 imageContainers[index].classList.remove('active');
-                // Hapus dari urutan aktif
                 const orderIndex = activeOrder.indexOf(index);
                 if (orderIndex > -1) {
                     activeOrder.splice(orderIndex, 1);
                 }
             }
-
-            updateStatusDisplay(); // Update display status
         }
-
-        // Initialize status display
-        updateStatusDisplay();
     </script>
 </body>
 </html>
