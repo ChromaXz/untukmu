@@ -1,177 +1,340 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .title {
-            text-align: center;
-            margin: 20px 0;
-            font-family: Arial, sans-serif;
-            color: #2196F3;
-            font-size: 1.5rem;
-            padding: 0 15px;
-        }
-        
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            padding: 15px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Risayanti! 🎂</title>
+<style>
+  * { box-sizing: border-box; }
 
-        .switch-card {
-            width: 100%;
-            margin: 0 auto;
-            text-align: center;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Comic Sans MS', 'Trebuchet MS', sans-serif;
+    background: linear-gradient(135deg, #ffe0f0 0%, #e0f7ff 50%, #fff5d6 100%);
+    background-size: 300% 300%;
+    animation: bgShift 10s ease infinite;
+    overflow: hidden;
+    position: relative;
+  }
 
-        .image-container {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 10px;
-            border-radius: 10px;
-            overflow: hidden;
-        }
+  @keyframes bgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
 
-        .image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.5;
-            transition: .4s;
-        }
+  .card {
+    background: #fffdf9;
+    border-radius: 30px;
+    padding: 40px 35px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(255, 150, 200, 0.35);
+    border: 4px dashed #ffb6d9;
+    position: relative;
+    z-index: 5;
+    animation: popIn 0.8s ease;
+  }
 
-        .image-container.active img {
-            opacity: 1;
-        }
+  @keyframes popIn {
+    0% { transform: scale(0.7); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
 
-        .form-check-input {
-            height: 25px !important;
-            width: 45px !important;
-            cursor: pointer;
-        }
+  .emoji-top {
+    font-size: 48px;
+    animation: wiggle 1.8s ease-in-out infinite;
+    display: inline-block;
+  }
 
-        .switch-label {
-            margin-top: 10px;
-            font-family: Arial, sans-serif;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(-8deg); }
+    50% { transform: rotate(8deg); }
+  }
 
-        .form-switch {
-            padding-left: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+  h1 {
+    color: #ff5fa2;
+    font-size: 28px;
+    margin: 10px 0 5px;
+    text-shadow: 2px 2px 0 #ffe0f0;
+  }
 
-        .form-switch .form-check-input {
-            margin-left: 0;
-        }
+  h2.name {
+    color: #ff8fb1;
+    font-size: 32px;
+    margin: 5px 0 20px;
+    font-family: 'Brush Script MT', cursive;
+    font-size: 38px;
+  }
 
-        @media (max-width: 576px) {
-            .container {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-                padding: 10px;
-            }
+  p.msg {
+    color: #7a5c6e;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 15px 0;
+  }
 
-            .switch-card {
-                padding: 8px;
-            }
+  .date-badge {
+    display: inline-block;
+    margin-top: 15px;
+    background: #fff0f7;
+    color: #ff5fa2;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 2px solid #ffcbe1;
+  }
 
-            .image-container {
-                width: 100px;
-                height: 100px;
-            }
+  .cake {
+    font-size: 60px;
+    margin: 15px 0;
+    animation: bounce 1.4s ease-in-out infinite;
+  }
 
-            .title {
-                font-size: 1.2rem;
-                margin: 15px 0;
-            }
-        }
-    </style>
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .balloons {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .balloon {
+    position: absolute;
+    bottom: -120px;
+    font-size: 40px;
+    animation: floatUp linear infinite;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-110vh) translateX(20px) rotate(15deg); opacity: 0.3; }
+  }
+
+  .confetti {
+    position: fixed;
+    top: -20px;
+    font-size: 20px;
+    animation: fall linear infinite;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0.8; }
+  }
+
+  .btn {
+    margin-top: 22px;
+    background: linear-gradient(135deg, #ff9fc7, #ffb6d9);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(255,150,200,0.5);
+    transition: transform 0.2s ease;
+    font-family: inherit;
+  }
+
+  .btn:active {
+    transform: scale(0.95);
+  }
+
+  .btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
+  .btn-secondary {
+    background: linear-gradient(135deg, #ffe3ce, #ffd1e8);
+  }
+
+  .nav-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+
+  .dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #ffd6e8;
+    transition: all 0.3s ease;
+  }
+
+  .dot.active {
+    background: #ff5fa2;
+    width: 22px;
+    border-radius: 6px;
+  }
+
+  .slide {
+    display: none;
+    animation: popIn 0.5s ease;
+  }
+
+  .slide.active {
+    display: block;
+  }
+
+  .big-emoji {
+    font-size: 60px;
+    margin: 10px 0;
+    animation: bounce 1.4s ease-in-out infinite;
+  }
+</style>
 </head>
 <body>
-    <h1 class="title">Ketika AKAD mau ngumpul</h1>
-    <div class="container">
-        <div class="switch-card">
-            <div class="image-container" id="image0">
-                <img src="dode.jpg" alt="Dode">
-            </div>
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="switch0" onchange="handleSwitch(0)">
-            </div>
-            <div class="switch-label">Dode</div>
-        </div>
-        <div class="switch-card">
-            <div class="image-container" id="image1">
-                <img src="ardha.jpg" alt="Ardha">
-            </div>
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="switch1" onchange="handleSwitch(1)">
-            </div>
-            <div class="switch-label">Ardha</div>
-        </div>
-        <div class="switch-card">
-            <div class="image-container" id="image2">
-                <img src="alfian.jpg" alt="Alfian">
-            </div>
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="switch2" onchange="handleSwitch(2)">
-            </div>
-            <div class="switch-label">Alfian</div>
-        </div>
-        <div class="switch-card">
-            <div class="image-container" id="image3">
-                <img src="komang.jpg" alt="Komang">
-            </div>
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="switch3" onchange="handleSwitch(3)">
-            </div>
-            <div class="switch-label">Komang</div>
-        </div>
+
+  <div class="balloons" id="balloons"></div>
+
+  <div class="card">
+
+    <div class="slide active" data-slide="0">
+      <div class="emoji-top">🎉✨🎂✨🎉</div>
+      <h1>Happy Birthday!</h1>
+      <h2 class="name">Risayanti 💕</h2>
+      <div class="cake">🍰</div>
+      <p class="msg">
+        Semoga hari ini penuh tawa, kejutan manis, dan semua hal baik<br>
+        yang kamu harapkan datang menghampiri! 🌸
+      </p>
+      <div class="date-badge">📅 9 September 2026</div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const switches = document.querySelectorAll('.form-check-input');
-        const imageContainers = document.querySelectorAll('.image-container');
-        let activeSwitches = [false, false, false, false];
-        let activeOrder = [];
+    <div class="slide" data-slide="1">
+      <div class="big-emoji">🥳</div>
+      <h1>Terus Bersinar!</h1>
+      <p class="msg">
+        Semoga tahun ini membawa lebih banyak kebahagiaan,<br>
+        kesehatan, dan mimpi-mimpi yang terwujud satu per satu. ✨<br><br>
+        Jadilah versi terbaik dari dirimu, Risa! 🌟
+      </p>
+    </div>
 
-        function handleSwitch(index) {
-            const isChecked = switches[index].checked;
-            
-            if (isChecked) {
-                if (activeOrder.length >= 3) {
-                    const oldestActiveIndex = activeOrder[0];
-                    switches[oldestActiveIndex].checked = false;
-                    imageContainers[oldestActiveIndex].classList.remove('active');
-                    activeSwitches[oldestActiveIndex] = false;
-                    activeOrder.shift();
-                }
-                
-                activeSwitches[index] = true;
-                imageContainers[index].classList.add('active');
-                activeOrder.push(index);
-            } else {
-                activeSwitches[index] = false;
-                imageContainers[index].classList.remove('active');
-                const orderIndex = activeOrder.indexOf(index);
-                if (orderIndex > -1) {
-                    activeOrder.splice(orderIndex, 1);
-                }
-            }
-        }
-    </script>
+    <div class="slide" data-slide="2">
+      <div class="big-emoji">🎁</div>
+      <h1>Sebuah Doa Kecil</h1>
+      <p class="msg">
+        Semoga rezeki lancar, hati selalu tenang,<br>
+        dan orang-orang baik selalu ada di sekelilingmu. 💫<br><br>
+        Happy birthday sekali lagi ya! 🎈
+      </p>
+    </div>
+
+    <div class="slide" data-slide="3">
+      <div class="big-emoji">💌</div>
+      <h1>Selamat Ulang Tahun!</h1>
+      <h2 class="name" style="font-size:26px;">Risayanti 🎂</h2>
+      <p class="msg">
+        Semoga harimu secerah senyummu.<br>
+        Sampai jumpa di ulang tahun berikutnya! 🥂
+      </p>
+      <div class="date-badge">📅 9 September 2026</div>
+    </div>
+
+    <div class="dots" id="dots"></div>
+
+    <div class="nav-row">
+      <button class="btn btn-secondary" id="prevBtn" onclick="changeSlide(-1)">⬅ Prev</button>
+      <button class="btn" id="nextBtn" onclick="changeSlide(1)">Next ➡</button>
+    </div>
+
+    <br>
+    <button class="btn" onclick="celebrate()">Klik untuk Konfeti 🎊</button>
+  </div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('dots');
+  let current = 0;
+
+  slides.forEach((s, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dotsContainer.appendChild(dot);
+  });
+
+  const dots = document.querySelectorAll('.dot');
+
+  function showSlide(index) {
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
+
+    document.getElementById('prevBtn').disabled = index === 0;
+    document.getElementById('nextBtn').disabled = index === slides.length - 1;
+
+    if (index === slides.length - 1) {
+      celebrate();
+    }
+  }
+
+  function changeSlide(dir) {
+    const next = current + dir;
+    if (next < 0 || next >= slides.length) return;
+    current = next;
+    showSlide(current);
+  }
+
+  showSlide(current);
+
+  function createBalloons() {
+    const emojis = ['🎈','🎈','🎈','💗','🩵'];
+    const container = document.getElementById('balloons');
+    for (let i = 0; i < 8; i++) {
+      const b = document.createElement('div');
+      b.className = 'balloon';
+      b.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      b.style.left = Math.random() * 100 + '%';
+      b.style.animationDuration = (8 + Math.random() * 6) + 's';
+      b.style.animationDelay = (Math.random() * 6) + 's';
+      container.appendChild(b);
+    }
+  }
+  createBalloons();
+  setInterval(createBalloons, 8000);
+
+  function celebrate() {
+    const emojis = ['🎉','✨','🎊','💖','🌸','⭐'];
+    for (let i = 0; i < 30; i++) {
+      const c = document.createElement('div');
+      c.className = 'confetti';
+      c.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      c.style.left = Math.random() * 100 + '%';
+      c.style.animationDuration = (2 + Math.random() * 2) + 's';
+      c.style.fontSize = (16 + Math.random() * 14) + 'px';
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 4000);
+    }
+  }
+</script>
+
 </body>
 </html>
